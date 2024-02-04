@@ -14,7 +14,7 @@ class NamedTextCard extends StatelessWidget {
         ),
         Text(category),
         const SizedBox(
-          width: 200,
+          width: 220,
         ),
         const Text("See All")
       ],

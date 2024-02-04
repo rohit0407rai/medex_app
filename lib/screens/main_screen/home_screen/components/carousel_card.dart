@@ -21,9 +21,9 @@ class CarouselCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         height: 160,
-        width: 282,
+        width: 290,
         decoration: const BoxDecoration(
-            color: Color(0xFF2D5ED0),
+            color: Color(0xFF0FA47F),
             borderRadius: BorderRadius.all(Radius.circular(20))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -61,7 +61,7 @@ class CarouselCard extends StatelessWidget {
                       Container(
                         height: 60,
                         width: 2,
-                        color: Colors.green,
+                        color: Colors.blue,
                       ),
                       const SizedBox(
                         width: 10,

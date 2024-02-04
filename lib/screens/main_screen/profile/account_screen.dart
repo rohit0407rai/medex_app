@@ -29,7 +29,7 @@ class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffE7EFFA),
+      backgroundColor: const Color(0xFFC5F2F4),
       body:SafeArea(
         child: SingleChildScrollView(
           child: Column(

@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:technovate/provider_state.dart';
+import 'package:technovate/providers/provider_state.dart';
 import 'package:technovate/screens/hospital.dart';
 import 'package:technovate/screens/main_screen/NavigationBar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:technovate/screens/main_screen/donate_screen/donate_screen.dart';
+import 'package:technovate/screens/main_screen/home_screen/medicine_generation.dart';
 import 'package:technovate/screens/main_screen/map_screen.dart';
 import 'package:technovate/screens/main_screen/profile/health_record.dart';
+import 'package:technovate/screens/medicine_notify.dart';
 import 'package:technovate/screens/splashScreen.dart';
 import 'package:technovate/screens/welcome_screen.dart';
-
+import 'package:flutter_gemini/flutter_gemini.dart';
 import 'firebase_options.dart';
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  Gemini.init(apiKey: 'AIzaSyApr28BlittTQ6b8gR77Js4Wsi0571jiro');
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -49,10 +53,13 @@ class MyApp extends StatelessWidget {
           //
           // This works for code too, not just values: Most code changes can be
           // tested with just a hot reload.
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
+          colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF0FA47F)),
+          appBarTheme: AppBarTheme(
+            color: Color(0xFF0FA47F)
+          ),
           useMaterial3: true,
         ),
-        home: const SplashScreen()),
+        home: SplashScreen()),
     );
   }
 }

@@ -19,7 +19,7 @@ class DoctorScreenCard extends StatelessWidget {
         height: 200,
         width: 200,
         decoration: const BoxDecoration(
-            color: Colors.white,
+            color: Color(0xFF0FA47F),
             borderRadius: BorderRadius.all(Radius.circular(12))
         ),
         child:  Row(

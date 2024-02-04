@@ -98,7 +98,7 @@ class _MapScreenState extends State<MapScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFF0FA47F),
         title: const Text("Find Hospitals"),
         centerTitle: true,
         automaticallyImplyLeading: false,
@@ -129,6 +129,7 @@ class _MapScreenState extends State<MapScreen> {
                   itemCount: markerData.length,
                   itemBuilder:(context,index){
                 return ListTile(
+
                   onTap: (){
                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const HospitalScreens()));
                   },

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:kommunicate_flutter/kommunicate_flutter.dart';
 import 'package:technovate/Database/database_apis.dart';
 import 'package:technovate/models/disease_card.dart';
@@ -9,7 +10,9 @@ import 'package:technovate/screens/main_screen/donate_screen/heart.dart';
 import 'package:technovate/screens/main_screen/home_screen/components/diseases_card.dart';
 import 'package:technovate/screens/main_screen/home_screen/components/named_text_card.dart';
 import 'package:technovate/screens/main_screen/home_screen/components/slidet_carousel.dart';
-
+import 'package:technovate/screens/main_screen/home_screen/flask_disease_predicytion.dart';
+import '../../noti.dart';
+import './chatbot.dart';
 import 'components/doctor_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,18 +23,22 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin=FlutterLocalNotificationsPlugin();
+  void initState(){
+    Noti.initialize(flutterLocalNotificationsPlugin);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     bool customIcon = false;
+
     List<DiseaseCardModel> disease = [
-      DiseaseCardModel("Heart", "assets/images/heart.png"),
-      DiseaseCardModel("Liver", "assets/images/liver.png"),
-      DiseaseCardModel("Kidney", "assets/images/kidney.png"),
-      DiseaseCardModel("Pancreas", "assets/images/pancreas.png"),
-      DiseaseCardModel("Eyes", "assets/images/eye-care.png"),
+      DiseaseCardModel("Diet Planner", "assets/images/dine.png"),
+      DiseaseCardModel("Mental Health", "assets/images/Mental-Health-icon.png"),
+      DiseaseCardModel("Medicine Bot", "assets/images/med.jpeg"),
     ];
     return Scaffold(
-      backgroundColor: const Color(0xffE7EFFA),
+      backgroundColor: const Color(0xFFC5F2F4),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -45,51 +52,48 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   // const Spacer(),
                   const SizedBox(
-                    width: 15,
+                    width: 10,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Find Your",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge!
-                            .copyWith(fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        "Specialist",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline5!
-                            .copyWith(fontWeight: FontWeight.bold),
-                      ),
-                    ],
+
+                  Spacer(),
+                  InkWell(
+                    highlightColor: Colors.transparent,
+                    splashColor: Colors.transparent,
+                    onTap: (){
+                      Noti.showBigTextNotification(title: "Medicine Time", body: "Time for intragesic MR", fln: flutterLocalNotificationsPlugin);
+                    },
+                    child: Container(
+                      height: 25,
+                      width: 25,
+                    ),
                   ),
-                  const Spacer(),
+                  SizedBox(width: 10,),
                   IconButton(
                       onPressed: () {
                          DatabaseApis.sendSOS(context);
+
                       },
+
                       icon: Image.asset('assets/images/sos.png', height: 30,width: 30,)),
                   const SizedBox(
                     width: 10,
                   ),
                   IconButton(
                       onPressed: () {
-                        dynamic conversationObject = {
-                          'appId': '3996ff78f04c2d423784aef0e837f53d3',
-                          // The [APP_ID](https://dashboard.kommunicate.io/settings/install) obtained from kommunicate dashboard.
-                        };
-                        KommunicateFlutterPlugin.buildConversation(
-                                conversationObject)
-                            .then((clientConversationId) {
-                          print("Conversation builder success : " +
-                              clientConversationId.toString());
-                        }).catchError((error) {
-                          print("Conversation builder error : " +
-                              error.toString());
-                        });
+                        // dynamic conversationObject = {
+                        //   'appId': '8dd55598866ed115265bb4e9d9c30f65',
+                        //   // The [APP_ID](https://dashboard.kommunicate.io/settings/install) obtained from kommunicate dashboard.
+                        // };
+                        // KommunicateFlutterPlugin.buildConversation(
+                        //         conversationObject)
+                        //     .then((clientConversationId) {
+                        //   print("Conversation builder success : " +
+                        //       clientConversationId.toString());
+                        // }).catchError((error) {
+                        //   print("Conversation builder error : " +
+                        //       error.toString());
+                        // });
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Chatbot()));
                       },
                       icon: const Icon(CupertinoIcons.chat_bubble_text_fill))
                 ],
@@ -111,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: ListView.builder(
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          padding: const EdgeInsets.symmetric(horizontal: 22),
                           child: DiseaseCard(
                             text: disease[index].text,
                             asset: disease[index].asset,
@@ -120,6 +124,52 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                       itemCount: disease.length,
                       scrollDirection: Axis.horizontal)),
+              SizedBox(height: 30,),
+              InkWell(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>PredictionPage()));
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 22),
+                  child: Container(
+                    height: 200,
+                    width: double.infinity,
+                    child: Row(
+                      children: [
+                        Image.asset("assets/images/instant-512.png", height: 150,),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("NEED INSTANT", style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold, fontSize: 20),maxLines: 2,),
+                            Text("SOLUTION?", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),maxLines: 2,),
+                            SizedBox(height: 20,),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20)
+                              ),
+                              child: Row(
+                                children: [
+                                  SizedBox(width: 10,),
+                                  Text("Click Here", style: TextStyle(color: Color(0xFF0FA47F), fontWeight: FontWeight.bold),),
+                                  Icon(Icons.arrow_forward_outlined, color: Color(0xFF0FA47F),),
+                                  SizedBox(width: 10,)
+                                ],
+                              ),
+                            )
+                          ],
+                        )
+
+                      ],
+                    ),
+                    decoration: BoxDecoration(
+                      color: Color(0xFF0FA47F),
+                      borderRadius: BorderRadius.circular(20)
+                    ),
+
+                  ),
+                ),
+              ),
               const SizedBox(
                 height: 30,
               ),

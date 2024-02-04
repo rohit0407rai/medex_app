@@ -12,9 +12,9 @@ class DoctorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffE7EFFA),
+      backgroundColor: const Color(0xffC5F2F4),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFF0FA47F),
         title: const Text("Doctors"),
         centerTitle: true,
         automaticallyImplyLeading: false,

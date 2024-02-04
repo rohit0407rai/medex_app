@@ -32,20 +32,7 @@ class _navigationBarState extends State<navigationBar> {
       body: SafeArea(
         child: Stack(
           children: [
-            PageView.builder(
-              itemBuilder: (context,index){
-                return pages[index];
-              },
-              itemCount: pages.length,
-              physics: const NeverScrollableScrollPhysics(),
-             onPageChanged: (index){
-               setState(() {
-                 selectedIndex=index;
-               });
-             },
-              pageSnapping: true,
-              controller: _pageController,
-            ),
+            pages[selectedIndex],
       Align(
         alignment: Alignment.topLeft,
         child: Padding(
@@ -78,11 +65,13 @@ class _navigationBarState extends State<navigationBar> {
               gap: 10,
               color: Colors.black,
               activeColor: Colors.white,
-              tabBackgroundColor: const Color(0xFF2D5ED0),
+              tabBackgroundColor: const Color(0xFF0FA47F),
               tabMargin: const EdgeInsets.only(bottom: 10),
               tabBorderRadius: 16,
               onTabChange: (index){
-               _pageController.animateToPage(index, duration:const  Duration(milliseconds: 300), curve: Curves.easeInOut);
+              setState(() {
+                selectedIndex=index;
+              });
               },
               selectedIndex: selectedIndex,
               curve: Curves.easeInOut,

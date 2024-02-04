@@ -189,7 +189,10 @@ class _DoctorDetailsState extends State<DoctorDetails> {
             const SizedBox(height: 30,),
             Padding(
                 padding: const EdgeInsets.only(left: 10,right: 10),
-                child: ElevatedButton(onPressed: (){},style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF2D5ED0),minimumSize: Size(350,60), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3))),child:const Text("Book An Appointment", style: TextStyle(color: Colors.white),)))
+                child: ElevatedButton(onPressed: (){
+
+                },style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF2D5ED0),minimumSize: Size(350,60), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3))),child:const Text("Book An Appointment", style: TextStyle(color: Colors.white),)))
+
           ],
         ),
       ),

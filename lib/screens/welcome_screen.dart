@@ -23,7 +23,7 @@ class WelcomeScreen extends StatelessWidget {
             children: [
               const Spacer(),
               const Text(
-                "MEDFIRE",
+                "INTELLIHEALTH",
                 style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800, color: Colors.white),
               ),
               const  Spacer(),

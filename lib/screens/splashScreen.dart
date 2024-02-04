@@ -45,19 +45,16 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          SvgPicture.asset(
-            "assets/app_design/splash_bg.svg",
+          Image.asset(
+            "assets/images/splash_png.jpeg",
             fit: BoxFit.cover,
           ),
-          const SafeArea(
+          SafeArea(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    "MEDFIRE",
-                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800, color: Colors.white),
-                  ),
+                  Image.asset("assets/images/medex.png"),
 
                 ],
               ))
